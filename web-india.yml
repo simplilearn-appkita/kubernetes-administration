@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-india
+spec:
+  containers:
+    - name: web-india
+      image: nginx
+      ports:
+        - containerPort: 80
+  nodeSelector:
+    site: india

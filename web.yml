@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-using-yaml
+spec:
+  containers:
+    - name: web-using-yaml
+      image: nginx
+      ports:
+        - containerPort: 80

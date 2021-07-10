@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tainted-web-master
+  labels:
+    app: tainted-web-master
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: tainted-web-master
+  template:
+    metadata:
+      labels:
+        app: tainted-web-master
+    spec:
+      containers:
+        - name: tainted-web-master
+          image: nginx
+          ports:
+            - containerPort: 80
+      tolerations:
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"

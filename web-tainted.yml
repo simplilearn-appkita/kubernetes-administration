@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tainted-web
+spec:
+  containers:
+    - name: tainted-web
+      image: nginx
+      ports:
+        - containerPort: 80
+  tolerations:
+    - key: "app"
+      value: "scanner"
+      effect: "NoSchedule"
+      operator: "Equal"
+

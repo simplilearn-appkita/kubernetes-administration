@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-node-affinity-prod
+spec:
+  affinity:
+    nodeAffinity:
+      # requiredDuringSchedulingIgnoredDuringExecution:
+      #   nodeSelectorTerms:
+      #   - matchExpressions:
+      #     - key: env
+      #       operator: In
+      #       values:
+      #       - test         
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: env
+            operator: In
+            values:
+            - prod
+  containers:
+    - name: web-node-affinity-prod
+      image: nginx
+      ports:
+        - containerPort: 80
