@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: custom-env
+  name: custom-env
+spec:
+  containers:
+  - env:
+    - name: author
+      value: azrad
+    - name: job
+      value: devops
+    image: alpine
+    name: custom-env
+    command: ["printenv"]
