@@ -32,10 +32,10 @@ Containers:
 `kubectl exec mysql-pod-with-secret -- printenv`
 
 ## Nginx using ConfigMap
-- `kubectl create configmap nginx-cm --from-file html/index.html`
-- `kubectl describe cm nginx-cm`
-- `kubectl apply -f pod-with-cm.yml`
-- `kubectl describe pod nginx-with-cm`
+`kubectl create configmap nginx-cm --from-file html/index.html`  
+`kubectl describe cm nginx-cm`  
+`kubectl apply -f pod-with-cm.yml`  
+`kubectl describe pod nginx-with-cm`
 
 expect the following from describe command:
 
@@ -48,14 +48,14 @@ Containers:
 ```
 
 ## Monitoring using Metrics Server
-- `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
-- `kubectl edit -n kube-system deployment metrics-server`
+`kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`  
+`kubectl edit -n kube-system deployment metrics-server`
 
 add a line under "Args"
 `- --kubelet-insecure-tls`
 
-- `kubectl top pod`
-- `kubectl top node`
+`kubectl top pod`  
+`kubectl top node`
 
 ## Run pod with custom environment
 
@@ -70,3 +70,12 @@ spec:
         - name: job
           value: devops
 ```
+
+## Run pod with multi containers
+`kubectl apply -f pod-with-multi-containers.yml`  
+`kubectl describe pod pod-with-logs`  
+`kubectl logs pod-with-logs -c nginx`  
+`kubectl logs pod-with-logs -c nginx`
+
+should see logs from both containers
+
