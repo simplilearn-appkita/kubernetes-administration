@@ -1,6 +1,6 @@
 ## Persistance Volume
-`kubectl apply -f persistance-volume-exercise.yml` 
-`kubectl get pv` 
+`kubectl apply -f persistance-volume-exercise.yml`  
+`kubectl get pv`  
 `kubectl describe pv pv-exercise` 
 
 expect from describe command:
@@ -14,8 +14,8 @@ Capacity:        2Gi
 ```
 
 ## MySQL with Secrets
-- `kubectl apply -f mysql-with-secrets.yml`
-- `kubectl describe pod mysql-pod-with-secret`
+`kubectl apply -f mysql-with-secrets.yml`  
+`kubectl describe pod mysql-pod-with-secret`
 
 expect from describe command:
 
