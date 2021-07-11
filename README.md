@@ -1,7 +1,7 @@
 ## Persistance Volume
-- `kubectl apply -f persistance-volume-exercise.yml`
-- `kubectl get pv`
-- `kubectl describe pv pv-exercise`
+`kubectl apply -f persistance-volume-exercise.yml` 
+`kubectl get pv` 
+`kubectl describe pv pv-exercise` 
 
 expect from describe command:
 
@@ -56,3 +56,17 @@ add a line under "Args"
 
 - `kubectl top pod`
 - `kubectl top node`
+
+## Run pod with custom environment
+
+add `env` under `spec.containers` data
+
+```yaml
+spec:
+  containers:
+    - env:
+        - name: author
+          value: azrad
+        - name: job
+          value: devops
+```
