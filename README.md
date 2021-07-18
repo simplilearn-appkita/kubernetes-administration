@@ -1,3 +1,18 @@
+## Autoscaling
+`kubectl apply -f web-autoscaling.yml`  
+
+to check:
+
+`kubectl get hpa-service`  
+
+to generate loads:
+
+`kubectl run -i --tty load-generator --rm --image busybox --restart Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache:7000; done"`  
+
+then do:
+
+`watch kubectl get hpa-service`  
+
 ## ClusterRoles and ClusterRoleBindings
 `kubectl apply -f cluster-role.yml`  
 `kubectl apply -f cluster-role-binding.yml`  
