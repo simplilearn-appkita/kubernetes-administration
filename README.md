@@ -1,3 +1,25 @@
+## initContainer
+`kubectl apply -f pod-initContainer.yml`  
+
+expect from describe command to see 2 images -- alpine and nginx used:
+
+```
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  34s   default-scheduler  Successfully assigned default/pod-init to ip-172-31-22-126
+  Normal  Pulling    34s   kubelet            Pulling image "alpine"
+  Normal  Pulled     32s   kubelet            Successfully pulled image "alpine" in 987.178154ms
+  Normal  Created    32s   kubelet            Created container r-n-g
+  Normal  Started    32s   kubelet            Started container r-n-g
+  Normal  Pulling    31s   kubelet            Pulling image "nginx"
+  Normal  Pulled     30s   kubelet            Successfully pulled image "nginx" in 1.004103224s
+  Normal  Created    30s   kubelet            Created container nginx
+  Normal  Started    30s   kubelet            Started container nginx
+```
+
+run curl ip-address and expect some random number
+
 ## Persistance Volume
 `kubectl apply -f persistance-volume-exercise.yml`  
 `kubectl get pv`  
