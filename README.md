@@ -1,3 +1,24 @@
+## ClusterRoles and ClusterRoleBindings
+`kubectl apply -f cluster-role.yml`  
+`kubectl apply -f cluster-role-binding.yml`  
+
+to verify:
+
+`kubectl auth can-i create pods --as cluster-admin --namespace kube-system`  
+`kubectl auth can-i create node --as cluster-admin`  
+`kubectl auth can-i delete node --as cluster-admin`
+
+## Roles and Bindings
+`kubectl create serviceaccount simplilearn`  
+
+to verify:
+
+`kubectl get role`  
+`kubectl get rolebinding`  
+`kubectl auth can-i get pods --as amit`
+`kubectl auth can-i create pods --as amit`
+`kubectl auth can-i delete pods --as amit`
+
 ## initContainer
 `kubectl apply -f pod-initContainer.yml`  
 
