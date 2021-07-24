@@ -1,3 +1,65 @@
+## Managing nodes
+`kubectl get nodes`  
+
+```
+NAME               STATUS    ROLES                  AGE   VERSION
+ip-172-31-19-204   Ready     <none>                 27d   v1.21.2
+ip-172-31-22-126   Ready     <none>                 27d   v1.21.2
+ip-172-31-28-65    Ready     control-plane,master   27d   v1.21.2
+```  
+
+`kubectl get pods -o wide`  
+
+```
+root@ip-172-31-28-65:~# kubectl get pods -o wide
+NAME                              READY   STATUS             RESTARTS   AGE     IP                NODE               NOMINATED NODE   READINESS GATES
+web-7b7d55d9cd-2c6bs              1/1     Running            0          64s     192.168.92.244    ip-172-31-19-204   <none>           <none>
+web-7b7d55d9cd-ccrgg              1/1     Running            0          64s     192.168.155.186   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-d79x5              1/1     Running            0          64s     192.168.155.140   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-dbpss              1/1     Running            0          64s     192.168.155.143   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-dkmkw              1/1     Running            0          64s     192.168.155.187   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-g6tmr              1/1     Running            0          64s     192.168.155.139   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-hkm56              1/1     Running            0          64s     192.168.92.251    ip-172-31-19-204   <none>           <none>
+web-7b7d55d9cd-hsqd4              1/1     Running            0          64s     192.168.155.129   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-kd8sn              1/1     Running            0          64s     192.168.92.242    ip-172-31-19-204   <none>           <none>
+web-7b7d55d9cd-vwfj6              1/1     Running            0          64s     192.168.92.241    ip-172-31-19-204   <none>           <none>
+```  
+
+to cordon node:
+
+`kubectl cordon ip-172-31-19-204`  
+
+```
+NAME               STATUS                     ROLES                  AGE   VERSION
+ip-172-31-19-204   Ready,SchedulingDisabled   <none>                 27d   v1.21.2
+ip-172-31-22-126   Ready                      <none>                 27d   v1.21.2
+ip-172-31-28-65    Ready                      control-plane,master   27d   v1.21.2
+```  
+
+to drain node:
+
+`kubectl drain ip-172-31-19-204`  
+
+and then check the pods:
+
+`kubectl get pods -o wide`  
+
+```
+NAME                              READY   STATUS             RESTARTS   AGE     IP                NODE               NOMINATED NODE   READINESS GATES
+web-7b7d55d9cd-ccrgg              1/1     Running            0          2m52s   192.168.155.186   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-d79x5              1/1     Running            0          2m52s   192.168.155.140   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-dbpss              1/1     Running            0          2m52s   192.168.155.143   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-dkmkw              1/1     Running            0          2m52s   192.168.155.187   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-fhz8x              1/1     Running            0          24s     192.168.155.135   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-g6tmr              1/1     Running            0          2m52s   192.168.155.139   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-hsqd4              1/1     Running            0          2m52s   192.168.155.129   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-qfvkb              1/1     Running            0          24s     192.168.155.141   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-r8fw6              1/1     Running            0          24s     192.168.155.132   ip-172-31-22-126   <none>           <none>
+web-7b7d55d9cd-sch44              1/1     Running            0          24s     192.168.155.137   ip-172-31-22-126   <none>           <none>
+```  
+
+web pods are evicted from Node1 and replaced in Node2
+
 ## Autoscaling
 `kubectl apply -f web-autoscaling.yml`  
 
